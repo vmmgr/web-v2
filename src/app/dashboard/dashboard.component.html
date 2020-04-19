@@ -1,32 +1,26 @@
-<mat-sidenav-container class="example-container">
+<mat-toolbar color="primary">
+  &nbsp;
+  <mat-icon aria-hidden="false" (click)="sidenav.toggle()">menu</mat-icon>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span>HomeVPS</span>
+</mat-toolbar>
+<mat-sidenav-container class="container">
   <mat-sidenav #sidenav mode="side" opened class="xexample-sidenav">
     <mat-nav-list>
-      <a mat-list-item routerLink=".">お知らせ</a>
+      <a mat-list-item routerLink="notice">お知らせ</a>
     </mat-nav-list>
     <mat-nav-list>
-      <a mat-list-item routerLink=".">VM一覧</a>
+      <a mat-list-item routerLink="list">一覧</a>
     </mat-nav-list>
-<!--    <mat-nav-list>-->
-<!--      <a mat-list-item routerLink=".">Storage一覧</a>-->
-<!--    </mat-nav-list>-->
     <mat-nav-list>
-      <a mat-list-item routerLink=".">ツール</a>
+      <a mat-list-item routerLink="tool">ツール</a>
     </mat-nav-list>
     <br>
-    <button mat-raised-button color="warn">ログアウト</button>
-
+    <br>
+    <button mat-raised-button color="warn" class="button">ログアウト</button>
   </mat-sidenav>
-
-
   <mat-sidenav-content>
-    <mat-toolbar>
-      <button mat-mini-fab color="primary" (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <button mat-raised-button color="warn">ログアウト</button>
-    </mat-toolbar>
-
-
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+

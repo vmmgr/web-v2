@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VmComponent } from './vm.component';
+import { VmCreateComponent } from './vm-create.component';
 
-describe('VmComponent', () => {
-  let component: VmComponent;
-  let fixture: ComponentFixture<VmComponent>;
+describe('VmCreateComponent', () => {
+  let component: VmCreateComponent;
+  let fixture: ComponentFixture<VmCreateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VmComponent ]
+      declarations: [ VmCreateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VmComponent);
+    fixture = TestBed.createComponent(VmCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

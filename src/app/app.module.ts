@@ -20,7 +20,6 @@ import {LoginComponent} from './user/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatChipsModule} from "@angular/material/chips";
-import {NavComponent} from './base/nav/nav.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
@@ -30,7 +29,6 @@ import {DashboardModule} from "./dashboard/dashboard.module";
   declarations: [
     AppComponent,
     LoginComponent,
-    NavComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -62,7 +60,6 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     MatFormFieldModule,
     MatSliderModule,
     MatToolbarModule,
-    NavComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

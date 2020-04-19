@@ -1,0 +1,93 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-chip-list aria-label="Fish selection">
+      <ng-container *ngIf="status == 0">
+        <mat-chip color="warn" selected>停止中</mat-chip>
+      </ng-container>
+      <ng-container *ngIf="status == 1">
+        <mat-chip color="primary" selected>起動中</mat-chip>
+      </ng-container>
+    </mat-chip-list>
+    <mat-card-title>vm-test</mat-card-title>
+    <mat-card-subtitle>Otaku</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+  </mat-card-content>
+
+
+  <mat-card-actions>
+    <div class="card">
+      <ng-container *ngIf="status != 0">
+        <button mat-raised-button disabled>起動</button>
+      </ng-container>
+      <ng-container *ngIf="status == 0">
+        <button mat-raised-button color="primary">起動</button>
+      </ng-container>
+      <ng-container *ngIf="status != 1">
+        <button mat-raised-button disabled>停止</button>
+      </ng-container>
+      <ng-container *ngIf="status == 1">
+        <button mat-button color="warn" [matMenuTriggerFor]="menu">停止</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>シャットダウン</button>
+          <button mat-menu-item>強制終了</button>
+        </mat-menu>
+      </ng-container>
+
+      <ng-container *ngIf="status != 1">
+        <button mat-raised-button disabled>再起動</button>
+      </ng-container>
+      <ng-container *ngIf="status == 1">
+        <button mat-stroked-button color="primary" [matMenuTriggerFor]="menu">再起動</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>ハードリセット</button>
+          <!--        <button mat-menu-item>再起動</button>-->
+        </mat-menu>
+      </ng-container>
+    </div>
+
+    <button mat-raised-button class="button">コンソール</button>
+    <button mat-flat-button [matMenuTriggerFor]="menu">その他</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>----</button>
+    </mat-menu>
+
+    <button mat-raised-button color="warn"><b>削除</b></button>
+  </mat-card-actions>
+</mat-card>
+<br>
+<div class="table">
+  <h2>サーバ情報</h2>
+  <table>
+    <tr>
+      <td class="td"><p>Node</p></td>
+      <td>saads</td>
+    </tr>
+    <tr>
+      <td class="td"><p>ID</p></td>
+      <td>saads</td>
+    </tr>
+    <tr>
+      <td class="td"><p>CPU</p></td>
+      <td>saads</td>
+    </tr>
+    <tr>
+      <td class="td"><p>Memory</p></td>
+      <td>saads</td>
+    </tr>
+    <tr>
+      <td class="td"><p>Storage</p></td>
+      <td>saads</td>
+    </tr>
+    <tr>
+      <td class="td"><p>Network</p></td>
+      <td>saads</td>
+    </tr>
+  </table>
+</div>
+<br>
+<button mat-stroked-button class="button" color="warn" (click)="goBack()">戻る</button>
+
+
