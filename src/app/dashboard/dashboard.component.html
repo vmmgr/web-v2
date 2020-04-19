@@ -17,7 +17,7 @@
     </mat-nav-list>
     <br>
     <br>
-    <button mat-raised-button color="warn" class="button">ログアウト</button>
+    <button mat-raised-button color="warn" class="button" (click)="this.authService.logout()">ログアウト</button>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
