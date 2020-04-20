@@ -48,6 +48,8 @@ import {VmCreateComponent, VMCreateDialog} from "./vm/vm-create/vm-create.compon
 import {NavComponent} from "./nav/nav.component";
 import {VMDeleteDialog, VmDetailComponent} from './vm/vm-detail/vm-detail.component';
 import {HttpClientModule} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {AngularFireModule} from "@angular/fire";
 
 
 @NgModule({
@@ -83,6 +85,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatExpansionModule,
     HttpClientModule,
     MatSelectModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   exports: [
     NavComponent,

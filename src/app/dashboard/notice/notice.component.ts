@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {NoticeService} from "../service/notice.service";
 
 @Component({
   selector: 'app-notice',
@@ -7,11 +8,22 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NoticeComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private noticeService: NoticeService,
+  ) {
 
   }
 
+  public data: any;
+
   ngOnInit(): void {
+    this.listNotify();
+  }
+
+  listNotify(): void {
+    this.noticeService.listNotify()
+      .then(d => this.data = d);
+    console.log(this.data)
   }
 
 }
