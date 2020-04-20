@@ -6,7 +6,9 @@
           <button mat-raised-button routerLink="/dashboard/vm/create">VM作成</button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <div class="right">
-            <p>全VM数: </p>
+              <mat-chip-list>
+                <mat-chip>全VM数: {{vms.length}}</mat-chip>
+              </mat-chip-list>
           </div>
         </mat-toolbar>
         <ng-container *ngFor="let vm of vms">

@@ -11,6 +11,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class DashboardComponent implements OnInit {
 
   private options: FormGroup;
+  public name: string = localStorage.getItem('user');
 
   constructor(
     private fb: FormBuilder,

@@ -21,6 +21,7 @@ export class ListComponent implements OnInit {
       , 60000);
   }
 
+  public count: number;
   public vms: VMData[] = new Array();
 
   getUserVM(): void {
@@ -29,7 +30,6 @@ export class ListComponent implements OnInit {
       .then((d) => {
         for (let i = 0; i < Object.keys(d).length; i++) {
           let net = d[i].net.split(",");
-          console.log(d[i])
           this.vms.push({
             nodeid: d[i].nodeid,
             id: d[i].id,
@@ -41,6 +41,7 @@ export class ListComponent implements OnInit {
             url: {console: d[i].vncurl},
           })
         }
+        this.vms.length = Object.keys(d).length;
       });
   }
 
