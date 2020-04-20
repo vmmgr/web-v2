@@ -9,13 +9,24 @@ export class BaseService {
   constructor() {
   }
 
-  urlGet(): string {
+  apiURLGet(): string {
     let tmp: string;
-    if (environment.https) {
+    if (environment.api.https) {
       tmp = 'https'
     } else {
       tmp = 'http'
     }
-    return tmp + '://' + environment.domain
+    return tmp + '://' + environment.api.domain
   }
+
+  consoleURLGet(): string {
+    let tmp: string;
+    if (environment.console.https) {
+      tmp = 'https'
+    } else {
+      tmp = 'http'
+    }
+    return tmp + '://' + environment.console.domain
+  }
+
 }

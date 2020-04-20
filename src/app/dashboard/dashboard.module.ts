@@ -47,6 +47,7 @@ import {ListComponent} from './list/list.component';
 import {VmCreateComponent} from "./vm/vm-create/vm-create.component";
 import {NavComponent} from "./nav/nav.component";
 import { VmDetailComponent } from './vm/vm-detail/vm-detail.component';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -78,6 +79,8 @@ import { VmDetailComponent } from './vm/vm-detail/vm-detail.component';
     MatMenuModule,
     MatTabsModule,
     MatExpansionModule,
+    HttpClientModule,
+    MatSelectModule,
   ],
   exports: [
     NavComponent,
