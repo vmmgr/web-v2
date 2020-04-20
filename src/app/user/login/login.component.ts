@@ -13,12 +13,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private _snackBar: MatSnackBar,
   ) {
   }
 
   public hide: boolean = true;
-  public result: string = '';
   user = new FormControl('', [Validators.required]);
   password = new FormControl();
 
@@ -47,21 +45,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginMail(): void {
     this.authService.verifyUser({user: this.user.value, pass: this.password.value})
-      .then((r)=>{
-        if (r){
-          this.result = '認証成功';
-        }else{
-          this.result = 'Wrong username or password !!'
-        }
-        this.openBar()
-      })
-
-  }
-
-  openBar() {
-    this._snackBar.open(this.result, '', {
-      duration: 2000,
-    });
-
   }
 }

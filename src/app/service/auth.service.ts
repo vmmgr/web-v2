@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BaseService} from "./base.service";
+import {environment} from "../../environments/environment";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +14,8 @@ export class AuthService {
     headers: new HttpHeaders('application/json')
   };
 
-  private isLogin = false;
-  private result: string;
-
   constructor(
+    private _snackBar: MatSnackBar,
     private http: HttpClient,
     private router: Router,
     private baseService: BaseService,
@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   public verifyUser(data: any): Promise<boolean> {
-    return this.http.post(this.baseService.urlGet() + '/api/v1/token', {
+    return this.http.post(this.baseService.apiURLGet() + '/api/v1/token', {
       user: data.user,
       pass: data.pass
     }, this.defalutHttpOptions)
@@ -33,16 +33,17 @@ export class AuthService {
           localStorage.setItem('token', result.token);
           localStorage.setItem('user', result.username);
           localStorage.setItem('userid', result.userid);
-          this.isLogin = true;
+          localStorage.setItem('logintime', String(new Date().getTime()));
           this.router.navigate(['/dashboard']);
+          this.openBar('認証成功');
           return true;
         } else {
-          this.isLogin = false;
+          this.openBar('Wrong username or password !!!');
           return false;
         }
       })
       .catch((err) => {
-        console.log('error: ' + err)
+        this.openBar('error: ' + err);
         return false;
       });
   }
@@ -51,8 +52,8 @@ export class AuthService {
     localStorage.removeItem('user');
     localStorage.removeItem('userid');
     localStorage.removeItem('token');
-    this.isLogin = false;
-    alert('ログアウト')
+    localStorage.removeItem('logintime');
+    this.openBar('ログアウト');
     this.router.navigate(['/login']);
   }
 
@@ -64,7 +65,7 @@ export class AuthService {
       })
     };
 
-    return this.http.post(this.baseService.urlGet() + '/api/v1/token/check', {}, httpOptions)
+    return this.http.post(this.baseService.apiURLGet() + '/api/v1/token/check', {}, httpOptions)
       .toPromise()
       .then(() => {
         return true;
@@ -77,10 +78,18 @@ export class AuthService {
   }
 
   loginCheck(): boolean {
-    if (localStorage.getItem('token') == undefined && this.isLogin == false) {
+    if (parseInt(localStorage.getItem('logintime')) + environment.timeout < new Date().getTime() || localStorage.getItem('token') == undefined) {
+      this.openBar('Token失効');
+      this.logout();
       return false;
     } else {
       return true;
     }
+  }
+
+  openBar(result: string) {
+    this._snackBar.open(result, 'Done', {
+      duration: 2000,
+    });
   }
 }
