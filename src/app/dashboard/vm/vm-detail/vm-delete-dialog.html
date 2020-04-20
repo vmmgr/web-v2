@@ -1,0 +1,6 @@
+<h1>VMID: {{data.id}}</h1>
+<p>VMを本当に削除しますか？</p>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">やめておく</button>
+  <button mat-button (click)="delete()" cdkFocusInitial>Ok</button>
+</div>

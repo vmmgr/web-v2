@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {VmService} from "../../service/vm.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {VMCreateDialog} from "../vm-create/vm-create.component";
 
 
 @Component({
@@ -11,13 +13,16 @@ import {VmService} from "../../service/vm.service";
 })
 export class VmDetailComponent implements OnInit {
 
-  public status: number = 0;
-  private id: number = +this.route.snapshot.paramMap.get('id');
+  // public status: number = 0;
+  private id: number;
   public vmdata: VMData;
   public netdata: NetData[] = new Array();
   public storagedata: StorageData[];
+  private timer: any;
 
   constructor(
+    public dialog: MatDialog,
+    private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private vmService: VmService,
@@ -25,6 +30,25 @@ export class VmDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = +this.route.snapshot.paramMap.get('id')
+    this.getData();
+    this.timer = setInterval(() => {
+        this.vmService.getVM(this.id)
+          .then((d) => {
+            this.vmdata.status = d.status;
+          })
+      }
+      , 5000);
+  }
+
+
+  getVMStatus(): void {
+    this.vmService.getVM(this.id).then((d) => {
+      this.vmdata.status = d.status;
+    });
+  }
+
+  getData(): void {
     this.vmService.getVM(this.id).then((d) => {
       let data = d.name.split('-');
       let netdata = d.net.split(',');
@@ -59,34 +83,74 @@ export class VmDetailComponent implements OnInit {
 
   start(): void {
     this.vmService.startVM(this.id);
+    this.getVMStatus();
   }
 
   stop(): void {
     this.vmService.stopVM(this.id);
+    this.getVMStatus();
   }
 
   shutdown(): void {
     this.vmService.shutdownVM(this.id);
+    this.getVMStatus();
   }
 
   reset(): void {
     this.vmService.resetVM(this.id);
+    this.getVMStatus();
   }
 
   pause(): void {
     this.vmService.pauseVM(this.id);
+    this.getVMStatus();
   }
 
   resume(): void {
     this.vmService.resumeVM(this.id);
+    this.getVMStatus();
   }
 
   delete(): void {
-    this.vmService.deleteVM(this.id);
+    const dialogRef = this.dialog.open(VMDeleteDialog, {
+      width: '250px',
+      data: {
+        id: this.id,
+        disabled: true,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      clearInterval(this.timer);
+      this.router.navigate(['/dashboard/list']);
+    });
   }
 
   goBack(): void {
     this.location.back();
+  }
+}
+
+@Component({
+  selector: 'vm-delete-dialog',
+  templateUrl: 'vm-delete-dialog.html',
+})
+export class VMDeleteDialog {
+
+  constructor(
+    private vmService: VmService,
+    public dialogRef: MatDialogRef<VMDeleteDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+  }
+
+  delete(): void {
+    this.vmService.deleteVM(this.data.id);
+    this.dialogRef.close();
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
@@ -113,6 +177,6 @@ interface NetData {
 interface StorageData {
   type: number;
   id: number;
-  name:string;
+  name: string;
   capacity: number;
 }

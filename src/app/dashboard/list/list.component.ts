@@ -15,12 +15,16 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserVM();
+    setInterval(() => {
+        this.getUserVM()
+      }
+      , 60000);
   }
 
   public vms: VMData[] = new Array();
 
-
   getUserVM(): void {
+    this.vms = [];
     this.VMService.getUserVM()
       .then((d) => {
         for (let i = 0; i < Object.keys(d).length; i++) {

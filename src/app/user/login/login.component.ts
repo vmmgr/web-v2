@@ -24,10 +24,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.user.hasError('required')) {
       return 'You must enter a value';
     }
-
     return this.user.hasError('email') ? 'Not a valid user' : '';
   }
-
 
   ngOnDestroy(): void {
   }

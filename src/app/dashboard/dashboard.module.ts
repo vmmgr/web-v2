@@ -44,9 +44,9 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {PortalModule} from "@angular/cdk/portal";
 import {ListComponent} from './list/list.component';
-import {VmCreateComponent} from "./vm/vm-create/vm-create.component";
+import {VmCreateComponent, VMCreateDialog} from "./vm/vm-create/vm-create.component";
 import {NavComponent} from "./nav/nav.component";
-import { VmDetailComponent } from './vm/vm-detail/vm-detail.component';
+import {VMDeleteDialog, VmDetailComponent} from './vm/vm-detail/vm-detail.component';
 import {HttpClientModule} from "@angular/common/http";
 
 
@@ -59,6 +59,8 @@ import {HttpClientModule} from "@angular/common/http";
     VmCreateComponent,
     NavComponent,
     VmDetailComponent,
+    VMCreateDialog,
+    VMDeleteDialog,
   ],
   imports: [
     CommonModule,
@@ -121,6 +123,10 @@ import {HttpClientModule} from "@angular/common/http";
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+  ],
+  entryComponents: [
+    VMCreateDialog,
+    VMDeleteDialog,
   ]
 })
 export class DashboardModule {

@@ -5,8 +5,13 @@
       <form [formGroup]="nodeFormGroup">
         <ng-template matStepLabel>Nodeの選択</ng-template>
         <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+          <mat-label>Node</mat-label>
+          <mat-select formControlName="node" required>
+            <ng-container *ngFor="let n of nodes">
+              <mat-option value="{{n.id}}">{{n.id}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <!--          <input matInput placeholder="TestVM" formControlName="firstCtrl" required>-->
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
@@ -18,8 +23,7 @@
         <ng-template matStepLabel>VMの名前</ng-template>
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="TestVM"
-                 required>
+          <input matInput formControlName="name" placeholder="TestVM" required>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -27,13 +31,16 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="nameFormGroup">
-      <form [formGroup]="nameFormGroup">
+    <mat-step [stepControl]="groupFormGroup">
+      <form [formGroup]="groupFormGroup">
         <ng-template matStepLabel>VMの所属グループの選択</ng-template>
         <mat-form-field>
           <mat-label>Group</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
+          <mat-select formControlName="group" required>
+            <ng-container *ngFor="let g of groups">
+              <mat-option value="{{g.name}}">{{g.name}}</mat-option>
+            </ng-container>
+          </mat-select>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -41,19 +48,84 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="nameFormGroup">
-      <form [formGroup]="nameFormGroup">
-        <ng-template matStepLabel>スペックの選択</ng-template>
+    <mat-step [stepControl]="cpuFormGroup">
+      <form [formGroup]="cpuFormGroup">
+        <ng-template matStepLabel>CPUの選択</ng-template>
         <mat-form-field>
-          <mat-label>Spec</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
+          <mat-label>CPU</mat-label>
+          <mat-select formControlName="cpu" required>
+            <ng-container *ngFor="let c of cpus">
+              <mat-option value="{{c.spec}}">{{c.spec}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="memoryFormGroup">
+      <form [formGroup]="memoryFormGroup">
+        <ng-template matStepLabel>Memoryの選択</ng-template>
+        <mat-form-field>
+          <mat-label>Memory</mat-label>
+          <mat-select formControlName="memory" required>
+            <ng-container *ngFor="let m of memorys">
+              <mat-option value="{{m.size}}">{{m.size}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="storageTypeFormGroup">
+      <form [formGroup]="storageTypeFormGroup">
+        <ng-template matStepLabel>Storage Typeの選択</ng-template>
+        <mat-form-field>
+          <mat-label>Storage</mat-label>
+          <mat-select formControlName="storagetype" required>
+            <ng-container *ngFor="let s of storages">
+              <mat-option value="{{s.type}}">{{s.type}}:{{s.name}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="storageSizeFormGroup">
+      <form [formGroup]="storageSizeFormGroup">
+        <ng-template matStepLabel>Storage Sizeの選択</ng-template>
+        <mat-form-field>
+          <mat-label>StorageSize</mat-label>
+          <mat-select formControlName="storagesize" required>
+            <ng-container *ngFor="let s of storageSizes">
+              <mat-option value="{{s.size}}">{{s.size}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="imageFormGroup">
+      <form [formGroup]="imageFormGroup">
+        <ng-template matStepLabel>Imageの選択</ng-template>
+        <mat-form-field>
+          <mat-label>Image</mat-label>
+          <mat-select formControlName="image" required>
+            <ng-container *ngFor="let i of images">
+              <mat-option value="{{i.name}}:{{i.tag}}">{{i.name}}:{{i.tag}}</mat-option>
+            </ng-container>
+          </mat-select>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -62,11 +134,12 @@
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
+      <ng-template matStepLabel>作成</ng-template>
+      <p>作成開始</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button (click)="create()">作成</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>
