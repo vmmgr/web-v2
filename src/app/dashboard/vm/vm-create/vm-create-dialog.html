@@ -1,0 +1,53 @@
+<div class="table">
+  <h2>VM情報</h2>
+  <h3 >{{data.result}}</h3>
+  <table>
+    <tr>
+      <td class="td"><p>NodeID</p></td>
+      <td>{{data.data.nodeid}}</td>
+    </tr>
+    <tr>
+      <td class="td"><p>VMName</p></td>
+      <td>{{data.data.vmname}}</td>
+    </tr>
+    <tr>
+      <td class="td"><p>Group</p></td>
+      <td>{{data.data.group}}</td>
+    </tr>
+    <tr>
+      <td class="td"><p>CPU</p></td>
+      <td>{{data.data.cpu}}CPU</td>
+    </tr>
+    <tr>
+      <td class="td"><p>Memory</p></td>
+      <td>{{data.data.mem}}MB</td>
+    </tr>
+    <tr>
+      <td class="td"><p>StorageType</p></td>
+      <td>{{data.data.storagetype}}</td>
+    </tr>
+    <tr>
+      <td class="td"><p>Storage</p></td>
+      <td>{{data.data.storage}}MB</td>
+    </tr>
+    <tr>
+      <td class="td"><p>Image</p></td>
+      <td>{{data.data.imagename}}:{{data.data.imagetype}}</td>
+    </tr>
+    <tr>
+      <td class="td"><p>自動起動</p></td>
+      <td>{{data.data.autostart}}</td>
+    </tr>
+  </table>
+</div>
+<p>上記の内容のスペックで作成します。</p>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">やめておく</button>
+  <ng-container *ngIf="data.disabled">
+    <button mat-button (click)="create()" cdkFocusInitial>Ok</button>
+  </ng-container>
+
+  <ng-container *ngIf="data.disabled == false">
+    <button mat-button disabled cdkFocusInitial>Ok</button>
+  </ng-container>
+</div>

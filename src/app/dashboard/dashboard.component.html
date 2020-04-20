@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  &nbsp;
+  <mat-icon aria-hidden="false" (click)="sidenav.toggle()">menu</mat-icon>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span>HomeVPS</span>
+  <div class="right">
+    <mat-chip-list>
+      <mat-chip color="primary" selected><b>{{name}}</b></mat-chip>
+    </mat-chip-list>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container class="container">
+  <mat-sidenav #sidenav mode="side" opened class="xexample-sidenav">
+    <mat-nav-list>
+      <a mat-list-item routerLink="notice">お知らせ</a>
+    </mat-nav-list>
+    <mat-nav-list>
+      <a mat-list-item routerLink="list">一覧</a>
+    </mat-nav-list>
+    <mat-nav-list>
+      <a mat-list-item routerLink="tool">ツール</a>
+    </mat-nav-list>
+    <mat-nav-list>
+      <a mat-list-item href="https://github.com/vmmgr">GitHub</a>
+    </mat-nav-list>
+    <br>
+    <br>
+    <button mat-raised-button color="warn" class="button" (click)="this.authService.logout()">ログアウト</button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

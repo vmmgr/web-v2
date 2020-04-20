@@ -19,21 +19,17 @@ import {MatMenuModule} from '@angular/material/menu';
 import {LoginComponent} from './user/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSliderModule} from "@angular/material/slider";
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {VmComponent} from './dashboard/vm/vm.component';
 import {MatChipsModule} from "@angular/material/chips";
-import {NavComponent} from './base/nav/nav.component';
-import {MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {DashboardModule} from "./dashboard/dashboard.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
-    VmComponent,
-    NavComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'serverApp'}),
@@ -57,12 +53,15 @@ import {MatSelectModule} from "@angular/material/select";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    DashboardModule,
+    HttpClientModule,
   ],
   exports: [
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSliderModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

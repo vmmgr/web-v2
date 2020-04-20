@@ -1,6 +1,8 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaMatcher} from "@angular/cdk/layout";
 import {FormControl, Validators} from "@angular/forms";
+import {AuthService} from "../../service/auth.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -9,22 +11,21 @@ import {FormControl, Validators} from "@angular/forms";
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+  ) {
   }
 
-  public hide = true;
-
-  email = new FormControl('', [Validators.required, Validators.email]);
+  public hide: boolean = true;
+  user = new FormControl('', [Validators.required]);
   password = new FormControl();
 
   getErrorMessage() {
-    if (this.email.hasError('required')) {
+    if (this.user.hasError('required')) {
       return 'You must enter a value';
     }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.user.hasError('email') ? 'Not a valid user' : '';
   }
-
 
   ngOnDestroy(): void {
   }
@@ -41,7 +42,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loginMail(): void {
-
+    this.authService.verifyUser({user: this.user.value, pass: this.password.value})
   }
-
 }

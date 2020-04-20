@@ -1,0 +1,25 @@
+<ng-container *ngFor="let d of data">
+  <mat-card class="card">
+    <mat-card-header>
+      <ng-container *ngIf="d.isImportant">
+        <mat-chip-list>
+          <mat-chip color="primary" selected>重要</mat-chip>
+        </mat-chip-list>
+      </ng-container>
+      <ng-container *ngIf="d.isFailure">
+        <mat-chip-list>
+          <mat-chip color="warn" selected>障害</mat-chip>
+        </mat-chip-list>
+      </ng-container>
+
+      <mat-card-title>{{d.title}}</mat-card-title>
+      <mat-card-subtitle>{{d.year}}/{{d.month}}/{{d.day}} {{d.hour}}:{{d.minute}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{d.comment}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+

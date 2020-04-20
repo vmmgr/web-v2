@@ -1,3 +1,7 @@
+<mat-toolbar color="primary">
+  &nbsp;&nbsp;&nbsp;
+  <span>HomeVPS</span>
+</mat-toolbar>
 <mat-card class="login-card">
   <mat-card-header>
     <mat-card-title class="login-title">ログイン</mat-card-title>
@@ -5,9 +9,9 @@
   <mat-card-content>
     <form (ngSubmit)="loginMail()" class="login-form" #loginForm="ngForm">
       <mat-form-field>
-        <mat-label>メールアドレスを入力してください</mat-label>
-        <input matInput placeholder="test@axishineno.net" [formControl]="email" required>
-        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-label>ユーザ名を入力してください</mat-label>
+        <input matInput placeholder="testuser" [formControl]="user" required>
+        <mat-error *ngIf="user.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>パスワードを入力してください</mat-label>
@@ -25,7 +29,9 @@
 <br>
 <br>
 <div class="button">
-  &nbsp;&nbsp;<button mat-raised-button color="primary" (click)="loginGoogle()">Googleで認証</button>&nbsp;&nbsp;&nbsp;<button
-  mat-stroked-button color="primary" (click)="loginTwitter()">Twitterで認証
-</button>
+  <p>現在、以下の認証方法は使えません</p>
+  &nbsp;&nbsp;
+  <button mat-raised-button color="primary" (click)="loginGoogle()">Googleで認証</button>
+  &nbsp;&nbsp;&nbsp;
+  <button mat-stroked-button color="primary" (click)="loginTwitter()">Twitterで認証</button>
 </div>
