@@ -2,7 +2,7 @@
 
 ## 特徴
 * RestAPI経由でvmmgrをWebから操作
-* WPAに対応
+* PWAに対応
 
 ### 設定ファイル(enviroment)
 `timeout: 21600 * 1000,` //APIの失効時間(ミリ秒)   
