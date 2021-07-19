@@ -123,18 +123,6 @@ export default function Dashboard(props: any) {
                         </ListItemIcon>
                         <ListItemText primary="VM"/>
                     </ListItem>
-                    <ListItem button onClick={SupportPage}>
-                        <ListItemIcon>
-                            <ChatIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Support"/>
-                    </ListItem>
-                    <ListItem button onClick={ProcedurePage}>
-                        <ListItemIcon>
-                            <NoteAddOutlinedIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="各種手続き"/>
-                    </ListItem>
                     <Divider/>
                 </Drawer>
                 <main className={classesDashboard.content}>
