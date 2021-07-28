@@ -6,6 +6,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import SignIn from './pages/Login/SignIn';
 import Dashboard from './pages/Dashboard/Dashboard';
 import VM from "./pages/VM/VM";
+import {VMDetail} from "./pages/VM/VMDetail";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Route exact path="/login" component={SignIn}/>
                 <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                 <PrivateRoute exact path="/dashboard/vm" component={VM}/>
+                <PrivateRoute exact path="/dashboard/vm/:vm_id" component={VMDetail}/>
             </Switch>
         </BrowserRouter>
     );

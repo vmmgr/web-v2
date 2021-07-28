@@ -79,12 +79,6 @@ export default function VM() {
             console.log(lastMessage?.data);
             const obj = JSON.parse(lastMessage?.data);
             console.log(obj);
-            // setBaseChatData(tmpChat => [...tmpChat, {
-            //     admin: obj.admin,
-            //     data: obj.message,
-            //     time: obj.time,
-            //     user_name: obj.username
-            // }]);
             if (obj.type === 1) {
                 if (obj.vm_detail == undefined) {
                     console.log("None");
@@ -158,6 +152,10 @@ export default function VM() {
         }
     };
 
+    const clickDetailPage = (vmID: number) => {
+        history.push('/dashboard/vm/' + vmID);
+    }
+
     return (
         <Dashboard title="VM Info">
             <VMCreateDialog key={"vm_create_dialog"} sendMessage={sendMessage} templateBase={template} message={message}
@@ -185,7 +183,7 @@ export default function VM() {
                     <Card className={classes.root}>
                         <CardContent>
                             <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                ID: {vm.uuid}
+                                ID: {vm.id}({vm.uuid})
                             </Typography>
                             <Typography variant="h5" component="h2">
                                 {vm.name}
@@ -200,7 +198,7 @@ export default function VM() {
                                         Cookies.get("access_token") + "/" + vm.id)}>NoVNC</Button>
                         </CardContent>
                         <CardActions>
-                            {/*<Button size="small" onClick={() => clickDetailPage(notice.ID)}>Detail</Button>*/}
+                            <Button size="small" onClick={() => clickDetailPage(vm.id)}>Detail</Button>
                         </CardActions>
                     </Card>
                 ))
